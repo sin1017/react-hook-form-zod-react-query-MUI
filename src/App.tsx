@@ -1,9 +1,9 @@
-import Users from "./users/comopnents/Users"
+import UsersProvider from "./users/components/UsersProvider"
 
 const App = () => {
   return (
     <>
-      <Users />
+      <UsersProvider />
     </>
   )
 }
