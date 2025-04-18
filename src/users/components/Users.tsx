@@ -1,15 +1,22 @@
-import { Stack, TextField } from '@mui/material';
+import { Stack, TextField, Typography } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import { Schema } from '../types/schema';
 import RHFAutocomplete from '../../component/RHFAutocomplate';
 import { useEffect } from 'react';
-import { useLanguages, useStates } from '../services/queries';
+import { useLanguages, useStates, useGenders, useSkills } from '../services/queries';
 import RHFToggleButtonGroup from '../../component/RHFToggleButtonGroup';
+import RHARadioGroup from '../../component/RHARadioGroup';
+import RHACheckBox from '../../component/RHACheckBox';
+import RHADateAndTimePicker from '../../component/RHADateAndTimePicker';
+import RHADateRangePicker from '../../component/RHADateRangePicker';
+import RHASlider from '../../component/RHASlider';
+import RHASwitch from '../../component/RHASwitch';
 
 const Users = () => {
   const statesQuery = useStates();
   const languagesQuery = useLanguages();
-
+  const gendersQuery = useGenders();
+  const skillsQuery = useSkills();
   const {
     register,
     formState: { errors },
@@ -53,6 +60,24 @@ const Users = () => {
         name="languesSpoken"
         options={languagesQuery.data}
       />
+      <RHARadioGroup<Schema>
+        name="gender"
+        options={gendersQuery.data}
+        label="Gender"
+      />
+      <RHACheckBox<Schema>
+        name="skills"
+        options={skillsQuery.data}
+        label="Skills"
+      />
+      <RHADateAndTimePicker<Schema>
+        name="registrationDateAndTime"
+        label="Registration Date & Time"
+      />
+      <Typography>Former Employment Period:</Typography>
+      <RHADateRangePicker<Schema> name="formerEmploymentPeriod" />
+      <RHASlider<Schema> name="salaryRange" label="Salary Range" />
+      <RHASwitch<Schema> name="isTeacher" label="Are you a teacher?" />
     </Stack>
   );
 };

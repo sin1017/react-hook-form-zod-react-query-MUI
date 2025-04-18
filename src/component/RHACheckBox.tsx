@@ -1,0 +1,56 @@
+import { Controller, FieldValues, Path, useFormContext } from "react-hook-form"
+import { Option } from "../types/option"
+import { Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel } from "@mui/material"
+
+type Props<T extends FieldValues> = {
+  name: Path<T>
+  options?: Option[]
+  label: string
+}
+
+const RHACheckBox = <T extends FieldValues>(
+  {
+    name,
+    options,
+    label
+  }: Props<T>) => {
+  const { control } = useFormContext()
+
+  return (
+    <Controller
+      control={control}
+      name={name}
+      render={({ field: { value, onChange }, fieldState: { error } }) => (
+        <FormControl error={!!error} onChange={onChange}>
+          <FormLabel>{label}</FormLabel>
+          <FormGroup >
+            {
+              options?.map((option) => (
+                <FormControlLabel
+                  key={option.id}
+                  label={option.label}
+                  control={
+                    <Checkbox
+                      checked={value === option.id}
+                      onChange={() => {
+                        if (value.includes(option.id)) {
+                          onChange((value as string[]).filter((item) => item !== option.id))
+                        } else {
+                          onChange([...value, option.id])
+                        }
+                      }}
+                      key={option.id}
+                    />
+                  }
+                />
+              ))
+            }
+          </FormGroup>
+          <FormHelperText>{error?.message}</FormHelperText>
+        </FormControl>
+      )}
+    />
+  )
+}
+
+export default RHACheckBox

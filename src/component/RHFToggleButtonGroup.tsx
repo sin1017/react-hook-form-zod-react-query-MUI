@@ -5,7 +5,7 @@ import { ToggleButton, ToggleButtonGroup } from "@mui/material"
 type Props<T extends FieldValues> = {
   name: Path<T>
   options?: Option[]
-  label: string
+  // label: string
 }
 
 const RHFToggleButtonGroup = <T extends FieldValues>({ name, options }: Props<T>) => {
@@ -15,7 +15,7 @@ const RHFToggleButtonGroup = <T extends FieldValues>({ name, options }: Props<T>
     <Controller
       control={control}
       name={name}
-      render={({ field: { onChange, value, ...restField } }) => (
+      render={({ field: { onChange, value } }) => (
         <ToggleButtonGroup
           onChange={(_, newValue) => {
             if (newValue.length) {
