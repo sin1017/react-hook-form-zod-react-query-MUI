@@ -10,7 +10,7 @@ type Props<T extends FieldValues> = {
   label: string
 }
 
-const RHFAutocomplete = <T extends FieldValues>({ name, options, label }: Props<T>) => {
+const RHFAutoComplete = <T extends FieldValues>({ name, options, label }: Props<T>) => {
   const { control } = useFormContext();
 
   return (
@@ -55,10 +55,6 @@ const RHFAutocomplete = <T extends FieldValues>({ name, options, label }: Props<
   )
 }
 
-export default RHFAutocomplete
+export default RHFAutoComplete
 
 
-// function Test(test: string) {
-
-// }
-// // type MyType

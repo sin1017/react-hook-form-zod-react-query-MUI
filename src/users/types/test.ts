@@ -1,3 +1,6 @@
+/*
+schema.ts 中的 zod 一些 type 用法，對照的 typescript 寫法及功能會是像以下這些
+*/
 type Laptop = {
   type: 'laptop';
   screenSize: number;
