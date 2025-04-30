@@ -21,7 +21,7 @@ const RHACheckBox = <T extends FieldValues>(
       control={control}
       name={name}
       render={({ field: { value, onChange }, fieldState: { error } }) => (
-        <FormControl error={!!error} onChange={onChange}>
+        <FormControl error={!!error}>
           <FormLabel>{label}</FormLabel>
           <FormGroup >
             {
@@ -31,10 +31,10 @@ const RHACheckBox = <T extends FieldValues>(
                   label={option.label}
                   control={
                     <Checkbox
-                      checked={value === option.id}
+                      checked={value.includes(option.id)}
                       onChange={() => {
                         if (value.includes(option.id)) {
-                          onChange((value as string[]).filter((item) => item !== option.id))
+                          onChange((value as number[]).filter((item) => item !== option.id))
                         } else {
                           onChange([...value, option.id])
                         }

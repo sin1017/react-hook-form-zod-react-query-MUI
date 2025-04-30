@@ -47,7 +47,7 @@ export const useUsers = () => {
   })
 }
 
-export const useUser = (id: string) => {
+export const useUser = (id: number) => {
   return useQuery({
     queryKey: ['user', { id }],
     queryFn: async (): Promise<Schema> => {

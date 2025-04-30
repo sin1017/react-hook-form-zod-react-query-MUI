@@ -4,10 +4,10 @@ type Create = {
 
 type Edit = {
   variant: 'edit';
-  id: string;
+  id: number;
 }
 
-export type Common = {
+export type ApiCommon = {
   name: string;
   email: string;
   states: string[];
@@ -23,5 +23,5 @@ export type Common = {
   }[];
 };
 
-export type ApiCreateEdit = Common & (Create | Edit);
-export type ApiGet = Edit & Common;
+export type ApiCreateEdit = ApiCommon & (Create | Edit);
+export type ApiGet = Edit & ApiCommon;

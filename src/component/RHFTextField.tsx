@@ -7,14 +7,15 @@ type Props<T extends FieldValues> = {
 
 const RHATextField = <T extends FieldValues>(
   {
-    name, ...props
+    name,
+    ...props
   }: Props<T>) => {
   const { control } = useFormContext()
 
   return (
     <Controller
-      control={control}
       name={name}
+      control={control}
       render={({ field, fieldState: { error } }) => (
         <TextField
           {...field}

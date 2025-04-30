@@ -8,7 +8,7 @@ export const userSchema = z.intersection(
       refine((text) => patterns.email.test(text), {
         message: "email 格式不符"
       }),
-    states: z.array(z.string()).min(1).max(3),
+    states: z.array(z.string()).min(1).max(2, { message: "最多只能選兩個" }),
     languesSpoken: z.array(z.string()),
     gender: z.string().min(1),
     skills: z.array(z.string()).max(2, { message: "最多只能選兩個" }),
@@ -23,7 +23,7 @@ export const userSchema = z.intersection(
     }),
     z.object({
       variant: z.literal('edit'),
-      id: z.string().min(1),
+      id: z.number().min(1),
     })
   ])
 )

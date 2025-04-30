@@ -18,38 +18,43 @@ const RHFAutoComplete = <T extends FieldValues>({ name, options, label }: Props<
       name={name}
       control={control}
       render={({ field: { value, onChange, ref }, fieldState: { error } }) => (
-        <Autocomplete
-          options={options || []}
-          value={value?.map((id: string) =>
-            options?.find(item => item.id === id)
-          )}
-          getOptionLabel={(option) => options?.find((item) => item.id === option.id)?.label ?? " "}
-          isOptionEqualToValue={(option, newValue) => option.id === newValue.id}
-          onChange={(_, newValue) => {
-            onChange(newValue.map((item) => item.id));
-          }}
-          disableCloseOnSelect
-          multiple
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              fullWidth
-              inputRef={ref}
-              error={!!error}
-              helperText={error?.message}
-              label={label}
-            />
-          )}
-          renderOption={(props, option, { selected }) => (
-            <Box component="li" {...props}>
-              <Checkbox
-                icon={<CheckBoxOutlineBlankIcon />}
-                checkedIcon={<CheckBoxIcon />}
-                checked={selected} />
-              {option.label}
-            </Box>
-          )}
-        />
+        options?.length ? (
+          <Autocomplete
+            options={options}
+            value={
+              value?.map((id: number) => options?.find(item => item.id === id))
+            }
+            getOptionLabel={(option) => options?.find((item) => item.id === option.id)?.label ?? " "}
+            isOptionEqualToValue={(option, newValue) => option.id === newValue.id}
+            onChange={(_, newValue) => {
+              onChange(newValue.map((item) => item.id));
+            }}
+            disableCloseOnSelect
+            multiple
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                fullWidth
+                inputRef={ref}
+                error={!!error}
+                helperText={error?.message}
+                label={label}
+              />
+            )}
+            renderOption={(props, option, { selected }) => {
+              const { key, ...other } = props
+              return <Box component="li" key={key} {...other}>
+                <Checkbox
+                  icon={<CheckBoxOutlineBlankIcon />}
+                  checkedIcon={<CheckBoxIcon />}
+                  checked={selected}
+                />
+                {option.label}
+              </Box>
+            }
+            }
+          />
+        ) : <></>
       )}
     />
   )
